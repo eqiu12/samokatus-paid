@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
