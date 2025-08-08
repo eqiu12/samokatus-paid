@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import HtmlEditor from "@/components/HtmlEditor";
 
 export default async function AdminPage() {
   const session = await getSession();
@@ -41,10 +42,10 @@ export default async function AdminPage() {
       </div>
 
       <h2 className="text-xl font-medium pt-6">Pages</h2>
-      <form action={createPage} className="flex flex-col gap-2 border rounded p-3">
+      <form action={createPage} className="flex flex-col gap-3 border rounded p-3">
         <input className="border p-2 rounded" name="title" placeholder="Title" required />
         <input className="border p-2 rounded" name="slug" placeholder="Slug (e.g. about)" required />
-        <textarea className="border p-2 rounded" name="content" placeholder="HTML content" rows={6} required />
+        <HtmlEditor name="content" label="Content" />
         <label className="flex items-center gap-2">
           <input type="checkbox" name="published" /> Published
         </label>
@@ -60,6 +61,9 @@ export default async function AdminPage() {
             <div className="font-medium">{p.title} — /{p.slug}</div>
             <div className="text-sm text-gray-600">{p.published ? "Published" : "Draft"} · {p.isPaidOnly ? "Paid-only" : "Public"}</div>
             <div className="flex gap-2 pt-2">
+              <a className="underline" href={`/admin/pages/${p.id}`}>
+                Edit
+              </a>
               <form action={togglePublish}>
                 <input type="hidden" name="pageId" value={p.id} />
                 <input type="hidden" name="to" value={(!p.published).toString()} />
