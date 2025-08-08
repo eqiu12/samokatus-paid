@@ -9,12 +9,19 @@ export default async function Home() {
   const user = session.user;
 
   return (
-    <div className="max-w-xl mx-auto p-8 space-y-6">
-      <h1 className="text-2xl font-semibold">Samokatus Paid – Mock Auth</h1>
+    <div className="space-y-6">
+      <section className="rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/60 backdrop-blur p-8 shadow-[0_1px_0_0_rgba(0,0,0,0.06),0_1px_3px_0_rgba(0,0,0,0.08)]">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          <span className="bg-gradient-to-r from-zinc-900 to-zinc-600 bg-clip-text text-transparent dark:from-white dark:to-zinc-300">
+            Samokatus Paid
+          </span>
+        </h1>
+        <p className="text-zinc-600 dark:text-zinc-300 mt-2">Mock authentication and paid content gating</p>
+      </section>
 
       {user ? (
         <div className="space-y-4">
-          <div className="rounded border p-4 space-y-1">
+          <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-zinc-900/50 backdrop-blur p-4 space-y-1">
             <div>
               <span className="font-medium">User:</span> {user.username}
             </div>
@@ -26,34 +33,34 @@ export default async function Home() {
             </div>
           </div>
           <div className="flex gap-4">
-            <Link href="/paid" className="underline">
+            <Link href="/paid" className="underline underline-offset-4 hover:text-blue-600">
               Go to paid area
             </Link>
             {user.role === "ADMIN" && (
-              <Link href="/admin" className="underline">
+              <Link href="/admin" className="underline underline-offset-4 hover:text-blue-600">
                 Admin dashboard
               </Link>
             )}
           </div>
           <form action={logout}>
-            <button className="px-3 py-2 border rounded" type="submit">
+            <button className="px-3 py-2 border rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800" type="submit">
               Logout
             </button>
           </form>
         </div>
       ) : (
         <div className="space-y-4">
-          <p>Log in with mock data for testing:</p>
+          <p className="text-zinc-600 dark:text-zinc-300">Log in with mock data for testing:</p>
           <form action={mockLogin} className="space-y-3">
             <input
               name="username"
               placeholder="username"
               required
-              className="border p-2 w-full rounded"
+              className="border p-2 w-full rounded-lg bg-white/70 dark:bg-zinc-900/50 backdrop-blur"
             />
             <div className="flex items-center gap-2">
               <label>Role:</label>
-              <select name="role" className="border p-2 rounded">
+              <select name="role" className="border p-2 rounded-lg bg-white/70 dark:bg-zinc-900/50 backdrop-blur">
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
               </select>
@@ -62,7 +69,7 @@ export default async function Home() {
               <input type="checkbox" name="isPaid" />
               <span>Mark as paid</span>
             </label>
-            <button type="submit" className="px-3 py-2 border rounded">
+            <button type="submit" className="px-3 py-2 border rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800">
               Login
             </button>
           </form>
