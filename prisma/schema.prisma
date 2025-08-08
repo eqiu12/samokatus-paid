@@ -24,4 +24,16 @@ enum UserRole {
   ADMIN
 }
 
+model Page {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  title       String
+  slug        String   @unique
+  content     String
+  published   Boolean  @default(false)
+  isPaidOnly  Boolean  @default(false)
+}
+
 
